@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:my_survey/data/questiondata.dart';
 import 'package:my_survey/models/my_questions.dart';
 import 'package:my_survey/models/options.dart';
 
@@ -10,6 +9,8 @@ class OptionsWidget extends StatelessWidget {
   const OptionsWidget(
       {Key? key, required this.question, required this.onClickedOption})
       : super(key: key);
+
+  widget({required List children}) {}
 
   @override
   Widget build(BuildContext context) {
@@ -25,11 +26,13 @@ class OptionsWidget extends StatelessWidget {
   }
 
   buildOption(BuildContext context, Option option) {
+    final color = getColorForOption(option, question);
     return GestureDetector(
         onTap: () => onClickedOption(option),
         child: Container(
-          padding: EdgeInsets.all(12),
-          decoration: BoxDecoration(color: Colors.grey),
+          padding: const EdgeInsets.all(12),
+          decoration: BoxDecoration(
+              color: color, borderRadius: BorderRadius.circular(16)),
           child: buildAnswer(option),
         ));
   }
@@ -53,5 +56,12 @@ class OptionsWidget extends StatelessWidget {
     );
   }
 
-  widget({required List children}) {}
+  Color getColorForOption(Option option, Question question) {
+    final isSelected = option == question.selectedOption;
+    if (!isSelected) {
+      return Colors.grey;
+    } else {
+      return Colors.greenAccent;
+    }
+  }
 }

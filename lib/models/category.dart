@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'my_questions.dart';
 
 class Category {
@@ -10,8 +9,8 @@ class Category {
   final List<Question> questions;
   final String imageURL;
 
-  Category(
-    this.icon, {
+  Category({
+    required this.icon,
     required this.categoryName,
     required this.questions,
     required this.imageURL,
