@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_survey/Widgets/category_headerWidget.dart';
+import 'package:my_survey/Widgets/survey_category_widget.dart';
 import '../data/categories.dart';
 
 class HomePage extends StatelessWidget {
@@ -38,7 +38,7 @@ class HomePage extends StatelessWidget {
       body: ListView(
         physics: const BouncingScrollPhysics(),
         padding: const EdgeInsets.all(16),
-        children: [buildCategories()],
+        children: [SurveyCategories()],
       ),
     );
   }
@@ -62,7 +62,7 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  buildCategories() {
+  SurveyCategories() {
     return Container(
       height: 250,
       child: GridView(
@@ -73,7 +73,9 @@ class HomePage extends StatelessWidget {
           childAspectRatio: 4 / 3,
         ),
         children: categories
-            .map((category) => CategoryHeaderWidget(category: category))
+            .map((category) => SurveyCategoriesWidget(
+                  category: category,
+                ))
             .toList(),
       ),
     );

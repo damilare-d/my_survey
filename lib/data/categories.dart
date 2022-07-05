@@ -1,32 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:my_survey/data/questiondata.dart';
 import 'package:my_survey/models/category.dart';
+import 'package:my_survey/models/my_questions.dart';
 
-final categories = <Category>[
-  Category(
+final categories = <SurveyCategoryModel>[
+  SurveyCategoryModel(
     icon: Icons.favorite,
-    questions: questions,
+    questions: questions.where((e) => e.type == QuestionType.loveType).toList(),
     imageURL: '',
     categoryName: 'Love',
     backgroundColor: Colors.blueAccent,
   ),
-  Category(
+  SurveyCategoryModel(
     icon: Icons.attach_money,
-    questions: questions,
+    questions: questions.where((e) => e.type == QuestionType.finance).toList(),
     imageURL: '',
     categoryName: 'Finance',
     backgroundColor: Colors.lightBlueAccent,
   ),
-  Category(
+  SurveyCategoryModel(
     icon: Icons.person,
-    questions: questions,
+    questions:
+        questions.where((e) => e.type == QuestionType.personality).toList(),
     imageURL: '',
     categoryName: 'Personality',
     backgroundColor: Colors.greenAccent,
   ),
-  Category(
+  SurveyCategoryModel(
     icon: Icons.health_and_safety,
-    questions: questions,
+    questions: questions.where((e) => e.type == QuestionType.health).toList(),
     imageURL: '',
     categoryName: 'Health',
     backgroundColor: Colors.grey,

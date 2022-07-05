@@ -1,34 +1,38 @@
 import 'package:flutter/material.dart';
+import 'package:my_survey/models/finance_questions.dart';
 import 'package:my_survey/models/my_questions.dart';
 import 'package:my_survey/models/options.dart';
+import 'package:my_survey/utils.dart';
 
 class OptionsWidget extends StatelessWidget {
   final Question question;
   final ValueChanged<Option> onClickedOption;
 
-  const OptionsWidget(
-      {Key? key, required this.question, required this.onClickedOption})
-      : super(key: key);
-
-  widget({required List children}) {}
+  const OptionsWidget({
+    Key? key,
+    required this.question,
+    required this.onClickedOption,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ListView(
       physics: const BouncingScrollPhysics(),
-      children: [
-        widget(
-            children: question.options
-                .map((option) => buildOption(context, option))
-                .toList()),
-      ],
+      children: Utils.heightBetween(
+          question.options
+              .map<Widget>((option) => buildOption(context, option))
+              .toList(),
+          height: 8),
     );
   }
 
   buildOption(BuildContext context, Option option) {
     final color = getColorForOption(option, question);
+
     return GestureDetector(
-        onTap: () => onClickedOption(option),
+        onTap: () {
+          onClickedOption(option);
+        },
         child: Container(
           padding: const EdgeInsets.all(12),
           decoration: BoxDecoration(

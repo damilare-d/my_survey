@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'my_questions.dart';
 
-class SurveyCategoryModel {
+class FinanceCategoryModel {
   final String categoryName;
   final String description;
   final Color backgroundColor;
@@ -9,7 +9,7 @@ class SurveyCategoryModel {
   final List<Question> questions;
   final String imageURL;
 
-  SurveyCategoryModel({
+  FinanceCategoryModel({
     required this.icon,
     required this.categoryName,
     required this.questions,
