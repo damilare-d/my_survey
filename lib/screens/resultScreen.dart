@@ -1,6 +1,11 @@
 import 'dart:math';
 import 'package:confetti/confetti.dart';
 import 'package:flutter/material.dart';
+import 'package:my_survey/models/category.dart';
+import 'package:my_survey/models/my_questions.dart';
+
+import '../data/questiondata.dart';
+import '../models/my_questions.dart';
 
 class ResultScreen extends StatefulWidget {
   @override
@@ -55,20 +60,21 @@ class _ResultScreenState extends State<ResultScreen> {
     return Stack(
       children: [
         Scaffold(
+          backgroundColor: Colors.grey,
           body: SafeArea(
               child: Center(
                   child: Column(
             children: [
               const Text(
-                'Thanks for making mySurvey be a part of your conscious growth process',
-                style: TextStyle(fontSize: 15),
+                'Thanks for making mySurvey\n be a part of your conscious growth process',
+                style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
               ),
               SizedBox(height: 5),
               const Text(
-                'do click on the submit button afterwards',
+                'do click on the submit button if you are done with the survey',
                 style: TextStyle(fontSize: 10, fontStyle: FontStyle.italic),
               ),
-              SizedBox(height: 5),
+              SizedBox(height: 25),
               TextButton(
                 onPressed: () {
                   if (isPlaying) {
@@ -76,6 +82,13 @@ class _ResultScreenState extends State<ResultScreen> {
                   } else {
                     controller.play();
                   }
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => FinalResultPage(
+                            category: SurveyCategoryModel(
+                                icon: Icons.favorite,
+                                questions: questions,
+                                categoryName: 'Love'),
+                          )));
                 },
                 child: Text(isPlaying ? 'submit' : 'submit',
                     style: const TextStyle(
@@ -99,6 +112,38 @@ class _ResultScreenState extends State<ResultScreen> {
           createParticlePath: drawStar, // define a custom shape/path.
         ),
       ],
+    );
+  }
+}
+
+class FinalResultPage extends StatelessWidget {
+  final SurveyCategoryModel category;
+  const FinalResultPage({Key? key, required this.category}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.separated(
+      itemCount: category.questions.length,
+      separatorBuilder: (BuildContext context, int index) {
+        return SizedBox(
+          height: 10,
+        );
+      },
+      itemBuilder: ((context, index) {
+        final question = category.questions[index];
+        return buildAnswer(question, index);
+      }),
+    );
+  }
+
+  Widget buildAnswer(Question question, int index) {
+    return Scaffold(
+      body: Column(
+        children: [
+          Text(category.questions[index].questionText),
+          Text(category.questions[index].selectedOption.toString()),
+        ],
+      ),
     );
   }
 }

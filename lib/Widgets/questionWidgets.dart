@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:my_survey/screens/resultScreen.dart';
 import 'package:provider/provider.dart';
 import '../models/category.dart';
 import '../models/my_questions.dart';
@@ -26,15 +27,18 @@ class QuestionWidget extends StatelessWidget {
         controller: controller,
         onPageChanged: onChangedPage,
         itemBuilder: (context, index) {
-          final financeQuestion = model.financeQuestions;
           final question = category.questions[index];
-          return buildQuestion(question: question, index: index);
+          return buildQuestion(
+              question: question, index: index, context: context);
         },
       );
     });
   }
 
-  Widget buildQuestion({required Question question, required int index}) =>
+  Widget buildQuestion(
+          {required BuildContext context,
+          required Question question,
+          required int index}) =>
       SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(15.0),
@@ -72,7 +76,11 @@ class QuestionWidget extends StatelessWidget {
                     onPressed: () {},
                   ),
                   MaterialButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => ResultScreen()));
+                    },
+                    child: Text('Submit'),
                   )
                 ],
               )

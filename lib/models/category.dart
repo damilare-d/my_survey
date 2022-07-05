@@ -7,14 +7,14 @@ class SurveyCategoryModel {
   final Color backgroundColor;
   final IconData icon;
   final List<Question> questions;
-  final String imageURL;
 
   SurveyCategoryModel({
     required this.icon,
     required this.categoryName,
     required this.questions,
-    required this.imageURL,
     this.backgroundColor = Colors.blue,
     this.description = '',
   });
+
+  checkCategoryName() {}
 }

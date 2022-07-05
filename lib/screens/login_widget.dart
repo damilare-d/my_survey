@@ -35,7 +35,25 @@ class _LogInWidgetState extends State<LogInWidget> {
             controller: passwordController,
             textInputAction: TextInputAction.next,
           ),
-          ElevatedButton(child: Text('Sign In'), onPressed: signIn)
+          ElevatedButton(
+            child: Text('Sign In'),
+            onPressed: signIn,
+          ),
+          ElevatedButton(
+            child: Text('Register'),
+            onPressed: () {
+              showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      title: Text('Register'),
+                      content: Text("Hey signIn page under construction"
+                          "please use test@gmail.com as the username and"
+                          "123456 as the password"),
+                    );
+                  });
+            },
+          ),
         ],
       ),
     );

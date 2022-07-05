@@ -1,4 +1,5 @@
 import 'package:concentric_transition/concentric_transition.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:my_survey/screens/signIn_screen.dart';
 
@@ -36,7 +37,7 @@ class WelcomeScreen1 extends StatelessWidget {
               height: 100,
               width: 100,
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(75),
+                  shape: BoxShape.circle,
                   image: DecorationImage(
                       image: AssetImage('assets/images/mySurvey.png'))),
             ),

@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:my_survey/models/finance_question_model.dart';
-import 'package:my_survey/screens/category_page.dart';
-import 'package:my_survey/screens/finance_screen.dart';
 import '../models/category.dart';
 import '../screens/finance_screen1.dart';
 import '../screens/health_screen.dart';
