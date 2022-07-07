@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:my_survey/data/questiondata.dart';
-import 'package:my_survey/screens/personality_screen.dart';
+import 'package:my_survey/screens/onBoarding%20screens/login_screen.dart';
+import 'package:my_survey/screens/surveyCategoryScreens/personality_screen.dart';
 import '../models/category.dart';
-import 'finance_screen1.dart';
-import 'health_screen.dart';
+import 'surveyCategoryScreens/finance_screen1.dart';
+import 'surveyCategoryScreens/health_screen.dart';
 import 'homepage.dart';
-import 'love_screen.dart';
+import 'surveyCategoryScreens/love_screen.dart';
+import 'package:my_survey/models/my_questions.dart';
 
 class NavigationDrawer extends StatelessWidget {
   const NavigationDrawer({
@@ -90,9 +92,12 @@ class NavigationDrawer extends StatelessWidget {
             Navigator.of(context).push(MaterialPageRoute(
                 builder: (context) => LoveCategoryPage(
                       loveCategory: SurveyCategoryModel(
-                          icon: Icons.favorite,
-                          categoryName: 'Love',
-                          questions: questions),
+                        icon: Icons.favorite,
+                        categoryName: 'Love',
+                        questions: questions
+                            .where((e) => e.type == QuestionType.loveType)
+                            .toList(),
+                      ),
                     )));
           },
         ),
@@ -103,9 +108,12 @@ class NavigationDrawer extends StatelessWidget {
             Navigator.of(context).push(MaterialPageRoute(
                 builder: (context) => FinancecategoryPage(
                       FinanceCategory: SurveyCategoryModel(
-                          icon: Icons.money,
-                          categoryName: 'Finance',
-                          questions: questions),
+                        icon: Icons.money,
+                        categoryName: 'Finance',
+                        questions: questions
+                            .where((e) => e.type == QuestionType.finance)
+                            .toList(),
+                      ),
                     )));
           },
         ),
@@ -116,9 +124,12 @@ class NavigationDrawer extends StatelessWidget {
             Navigator.of(context).push(MaterialPageRoute(
                 builder: (context) => PersonalityCategoryPage(
                       personalityCategory: SurveyCategoryModel(
-                          icon: Icons.people,
-                          categoryName: 'Love',
-                          questions: questions),
+                        icon: Icons.people,
+                        categoryName: 'Personality',
+                        questions: questions
+                            .where((e) => e.type == QuestionType.personality)
+                            .toList(),
+                      ),
                     )));
           },
         ),
@@ -129,9 +140,12 @@ class NavigationDrawer extends StatelessWidget {
             Navigator.of(context).push(MaterialPageRoute(
                 builder: (context) => HealthCategoryPage(
                       healthCategory: SurveyCategoryModel(
-                          icon: Icons.health_and_safety,
-                          categoryName: 'Health',
-                          questions: questions),
+                        icon: Icons.health_and_safety,
+                        categoryName: 'Health',
+                        questions: questions
+                            .where((e) => e.type == QuestionType.health)
+                            .toList(),
+                      ),
                     )));
           },
         ),
@@ -152,7 +166,8 @@ class NavigationDrawer extends StatelessWidget {
         ListTile(
           title: Text('SIGN OUT'),
           onTap: () {
-            //todo put the navigation for signout
+            Navigator.of(context)
+                .push(MaterialPageRoute(builder: (context) => LogInScreen()));
           },
         )
       ],

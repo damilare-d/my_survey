@@ -3,6 +3,7 @@ import 'package:confetti/confetti.dart';
 import 'package:flutter/material.dart';
 import 'package:my_survey/models/category.dart';
 import 'package:my_survey/models/my_questions.dart';
+import 'package:my_survey/screens/onBoarding%20screens/login_screen.dart';
 
 import '../data/questiondata.dart';
 import '../models/my_questions.dart';
@@ -122,17 +123,23 @@ class FinalResultPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.separated(
-      itemCount: category.questions.length,
-      separatorBuilder: (BuildContext context, int index) {
-        return SizedBox(
-          height: 10,
-        );
-      },
-      itemBuilder: ((context, index) {
-        final question = category.questions[index];
-        return buildAnswer(question, index);
-      }),
+    return Scaffold(
+      body: Container(
+        height: MediaQuery.of(context).size.height * 0.8,
+        width: MediaQuery.of(context).size.width * 0.8,
+        child: ListView.separated(
+          itemCount: category.questions.length,
+          separatorBuilder: (BuildContext context, int index) {
+            return SizedBox(
+              height: 10,
+            );
+          },
+          itemBuilder: ((context, index) {
+            final question = category.questions[index];
+            return buildAnswer(question, index);
+          }),
+        ),
+      ),
     );
   }
 
@@ -141,7 +148,17 @@ class FinalResultPage extends StatelessWidget {
       body: Column(
         children: [
           Text(category.questions[index].questionText),
+          SizedBox(height: 10),
           Text(category.questions[index].selectedOption.toString()),
+          SizedBox(
+            height: 20,
+          ),
+          MaterialButton(
+            onPressed: () {
+              // Navigator.of()
+              //     .push(MaterialPageRoute(builder: (context) => LogInScreen()));
+            },
+          )
         ],
       ),
     );

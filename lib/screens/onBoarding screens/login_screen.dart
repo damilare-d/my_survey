@@ -1,14 +1,14 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class LogInWidget extends StatefulWidget {
-  const LogInWidget({Key? key}) : super(key: key);
+class LogInScreen extends StatefulWidget {
+  const LogInScreen({Key? key}) : super(key: key);
 
   @override
-  State<LogInWidget> createState() => _LogInWidgetState();
+  State<LogInScreen> createState() => _LogInScreenState();
 }
 
-class _LogInWidgetState extends State<LogInWidget> {
+class _LogInScreenState extends State<LogInScreen> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
@@ -16,7 +16,6 @@ class _LogInWidgetState extends State<LogInWidget> {
   void dispose() {
     emailController.dispose();
     passwordController.dispose();
-
     super.dispose();
   }
 
@@ -31,16 +30,21 @@ class _LogInWidgetState extends State<LogInWidget> {
           TextField(
               controller: emailController,
               textInputAction: TextInputAction.next),
+          SizedBox(height: 10),
           TextField(
             controller: passwordController,
             textInputAction: TextInputAction.next,
           ),
+          SizedBox(height: 20),
           ElevatedButton(
             child: Text('Sign In'),
             onPressed: signIn,
           ),
-          ElevatedButton(
-            child: Text('Register'),
+          SizedBox(
+            height: 15,
+          ),
+          TextButton(
+            child: Text('Pls Register HERE'),
             onPressed: () {
               showDialog(
                   context: context,
@@ -60,8 +64,20 @@ class _LogInWidgetState extends State<LogInWidget> {
   }
 
   Future signIn() async {
-    await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: emailController.text.trim(),
-        password: passwordController.text.trim());
+    // showDialog(
+    //   context: context,
+    //   barrierDismissible: false,
+    //   builder: (BuildContext context) {
+    //     return Center(child: CircularProgressIndicator());
+    //   },
+    // );
+
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: emailController.text.trim(),
+          password: passwordController.text.trim());
+    } on FirebaseAuthException catch (e) {
+      print(e);
+    }
   }
 }

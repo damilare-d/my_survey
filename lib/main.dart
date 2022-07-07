@@ -1,11 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_survey/screens/SplashScreen.dart';
-import 'package:my_survey/screens/finance_screen.dart';
-import 'package:my_survey/screens/homepage.dart';
-import 'package:my_survey/screens/resultScreen.dart';
-import 'package:my_survey/screens/welcome_screen.dart';
-import 'package:my_survey/stateprovider.dart';
-import 'package:provider/provider.dart';
+import 'package:my_survey/screens/onBoarding%20screens/SplashScreen.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 Future main() async {
@@ -21,14 +15,11 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-        create: (BuildContext context) => DolapoController(),
-        child: MaterialApp(
-          theme: ThemeData(
-            primarySwatch: Colors.blue,
-          ),
-          home: WelcomeScreen(),
-          // FinanceCategoryPage(),
-        ));
+    return MaterialApp(
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: SplashScreen(),
+    );
   }
 }

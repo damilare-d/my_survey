@@ -8,8 +8,6 @@ class HomePage extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
-  // get category => const category;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

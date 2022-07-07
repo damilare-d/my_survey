@@ -1,8 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:my_survey/models/category.dart';
 import 'package:my_survey/screens/homepage.dart';
-import 'login_widget.dart';
+import 'login_screen.dart';
 
 class SignInScreen extends StatelessWidget {
   const SignInScreen({Key? key}) : super(key: key);
@@ -12,11 +11,10 @@ class SignInScreen extends StatelessWidget {
       body: StreamBuilder<User?>(
           stream: FirebaseAuth.instance.authStateChanges(),
           builder: (context, snapshot) {
-            final SurveyCategoryModel category;
             if (snapshot.hasData) {
               return HomePage();
             } else {
-              return LogInWidget();
+              return LogInScreen();
             }
           }));
 }

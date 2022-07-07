@@ -1,11 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:my_survey/screens/resultScreen.dart';
-import 'package:provider/provider.dart';
 import '../models/category.dart';
 import '../models/my_questions.dart';
 import '../models/options.dart';
-import '../stateprovider.dart';
 import 'option_widget.dart';
 
 class QuestionWidget extends StatelessWidget {
@@ -22,17 +20,15 @@ class QuestionWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<DolapoController>(builder: (context, model, _) {
-      return PageView.builder(
-        controller: controller,
-        onPageChanged: onChangedPage,
-        itemBuilder: (context, index) {
-          final question = category.questions[index];
-          return buildQuestion(
-              question: question, index: index, context: context);
-        },
-      );
-    });
+    return PageView.builder(
+      controller: controller,
+      onPageChanged: onChangedPage,
+      itemBuilder: (context, index) {
+        final question = category.questions[index];
+        return buildQuestion(
+            question: question, index: index, context: context);
+      },
+    );
   }
 
   Widget buildQuestion(
@@ -88,63 +84,4 @@ class QuestionWidget extends StatelessWidget {
           ),
         ),
       );
-}
-
-class QWidget extends StatefulWidget {
-  const QWidget({Key? key}) : super(key: key);
-
-  @override
-  State<QWidget> createState() => _QWidgetState();
-}
-
-class _QWidgetState extends State<QWidget> {
-  Color colour = Colors.grey;
-
-  @override
-  Widget build(BuildContext context) {
-    return Consumer<DolapoController>(builder: (context, model, _) {
-      return Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 15.0),
-            child: SizedBox(
-                height: 100,
-                child: Card(
-                    color: Colors.blue,
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(model
-                          .financeQuestions[model.pageNumber].questionText),
-                    ))),
-          ),
-          ListView.builder(
-            shrinkWrap: true,
-            itemCount: model.financeQuestions[model.pageNumber].options.length,
-            itemBuilder: (context, index) {
-              return GestureDetector(
-                onTap: () {
-                  setState(() {
-                    colour = Colors.greenAccent;
-                  });
-                },
-                child: Container(
-                  decoration: BoxDecoration(color: colour),
-                  child: RadioListTile(
-                    value:
-                        model.financeQuestions[model.pageNumber].options[index],
-                    title: Text(
-                      model.financeQuestions[model.pageNumber].options[index],
-                    ),
-                    groupValue: model.groupValue[model.pageNumber],
-                    onChanged: (String? value) => model.onAnswerPicked(value),
-                  ),
-                ),
-              );
-            },
-          )
-        ],
-      );
-    });
-  }
 }

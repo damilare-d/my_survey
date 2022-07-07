@@ -1,7 +1,7 @@
 import 'package:concentric_transition/concentric_transition.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:my_survey/screens/signIn_screen.dart';
+import 'package:my_survey/screens/onBoarding%20screens/signIn_screen.dart';
 
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({Key? key}) : super(key: key);

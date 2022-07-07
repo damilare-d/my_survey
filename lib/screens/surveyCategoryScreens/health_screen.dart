@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:my_survey/models/category.dart';
-import '../Widgets/questionWidgets.dart';
-import '../Widgets/question_number_widget.dart';
-import '../models/my_questions.dart';
-import '../models/options.dart';
+import '../../Widgets/questionWidgets.dart';
+import '../../Widgets/question_number_widget.dart';
+import '../../models/my_questions.dart';
+import '../../models/options.dart';
 
-class FinancecategoryPage extends StatefulWidget {
-  final SurveyCategoryModel FinanceCategory;
-  const FinancecategoryPage({Key? key, required this.FinanceCategory})
+class HealthCategoryPage extends StatefulWidget {
+  final SurveyCategoryModel healthCategory;
+  const HealthCategoryPage({Key? key, required this.healthCategory})
       : super(key: key);
 
   @override
-  State<FinancecategoryPage> createState() => _FinancecategoryPageState();
+  State<HealthCategoryPage> createState() => _HealthCategoryPageState();
 }
 
-class _FinancecategoryPageState extends State<FinancecategoryPage> {
+class _HealthCategoryPageState extends State<HealthCategoryPage> {
   PageController? controller;
   Question? question;
 
@@ -23,12 +23,12 @@ class _FinancecategoryPageState extends State<FinancecategoryPage> {
     super.initState();
 
     controller = PageController();
-    question = widget.FinanceCategory.questions.first;
+    question = widget.healthCategory.questions.first;
   }
 
   void selectOption(Option option) {
     setState(() {
-      //question!.isLocked = true;
+      //  question!.isLocked = true;
       question!.selectedOption = option;
     });
   }
@@ -40,7 +40,7 @@ class _FinancecategoryPageState extends State<FinancecategoryPage> {
           preferredSize: const Size.fromHeight(100),
           child: buildCategoryAppBar(context)),
       body: QuestionWidget(
-        category: widget.FinanceCategory,
+        category: widget.healthCategory,
         onChangedPage: (index) {
           return nextQuestion(index: index, jump: true);
         },
@@ -60,16 +60,17 @@ class _FinancecategoryPageState extends State<FinancecategoryPage> {
     } else {
       indexPage = nextPage.toInt();
     }
+
     setState(() {
-      question = widget.FinanceCategory.questions[indexPage];
+      question = widget.healthCategory.questions[indexPage];
     });
     if (jump) {
-      controller?.jumpToPage(indexPage);
+      controller?.jumpToPage(index);
     }
   }
 
   Widget buildCategoryAppBar(context) => AppBar(
-        title: Text(widget.FinanceCategory.categoryName),
+        title: Text(widget.healthCategory.categoryName),
         actions: const [
           Icon(Icons.filter_alt_outlined),
           SizedBox(
@@ -90,15 +91,15 @@ class _FinancecategoryPageState extends State<FinancecategoryPage> {
           child: Container(
             padding: const EdgeInsets.symmetric(vertical: 16),
             child: QuestionNumberWidget(
-                questions: widget.FinanceCategory.questions,
-                question: question!,
-                onQuestionNumberChangedCallback: (index) {
-                  nextQuestion(index: index);
-                }
-                // onClickedNumber: (index) {
-                //return nextQuestion(index: index);
-                //}
-                ),
+              questions: widget.healthCategory.questions,
+              question: question!,
+              onQuestionNumberChangedCallback: (index) {
+                nextQuestion(index: index, jump: true);
+              },
+              // onClickedNumber: (index) {
+              //   return nextQuestion(index: index);
+              // }
+            ),
           ),
         ),
       );

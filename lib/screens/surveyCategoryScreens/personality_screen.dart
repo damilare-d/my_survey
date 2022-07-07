@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:my_survey/models/category.dart';
-import '../Widgets/questionWidgets.dart';
-import '../Widgets/question_number_widget.dart';
-import '../models/my_questions.dart';
-import '../models/options.dart';
+import '../../Widgets/questionWidgets.dart';
+import '../../Widgets/question_number_widget.dart';
+import '../../models/my_questions.dart';
+import '../../models/options.dart';
 
 class PersonalityCategoryPage extends StatefulWidget {
   final SurveyCategoryModel personalityCategory;

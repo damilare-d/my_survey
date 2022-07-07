@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:my_survey/models/category.dart';
-import '../Widgets/questionWidgets.dart';
-import '../Widgets/question_number_widget.dart';
-import '../models/my_questions.dart';
-import '../models/options.dart';
+import '../../Widgets/questionWidgets.dart';
+import '../../Widgets/question_number_widget.dart';
+import '../../models/my_questions.dart';
+import '../../models/options.dart';
 
-class HealthCategoryPage extends StatefulWidget {
-  final SurveyCategoryModel healthCategory;
-  const HealthCategoryPage({Key? key, required this.healthCategory})
+class LoveCategoryPage extends StatefulWidget {
+  final SurveyCategoryModel loveCategory;
+  const LoveCategoryPage({Key? key, required this.loveCategory})
       : super(key: key);
 
   @override
-  State<HealthCategoryPage> createState() => _HealthCategoryPageState();
+  State<LoveCategoryPage> createState() => _LoveCategoryPageState();
 }
 
-class _HealthCategoryPageState extends State<HealthCategoryPage> {
+class _LoveCategoryPageState extends State<LoveCategoryPage> {
   PageController? controller;
   Question? question;
 
@@ -23,12 +23,12 @@ class _HealthCategoryPageState extends State<HealthCategoryPage> {
     super.initState();
 
     controller = PageController();
-    question = widget.healthCategory.questions.first;
+    question = widget.loveCategory.questions.first;
   }
 
   void selectOption(Option option) {
     setState(() {
-      //  question!.isLocked = true;
+      //question!.isLocked = true;
       question!.selectedOption = option;
     });
   }
@@ -40,7 +40,7 @@ class _HealthCategoryPageState extends State<HealthCategoryPage> {
           preferredSize: const Size.fromHeight(100),
           child: buildCategoryAppBar(context)),
       body: QuestionWidget(
-        category: widget.healthCategory,
+        category: widget.loveCategory,
         onChangedPage: (index) {
           return nextQuestion(index: index, jump: true);
         },
@@ -60,17 +60,16 @@ class _HealthCategoryPageState extends State<HealthCategoryPage> {
     } else {
       indexPage = nextPage.toInt();
     }
-
     setState(() {
-      question = widget.healthCategory.questions[indexPage];
+      question = widget.loveCategory.questions[indexPage];
     });
     if (jump) {
-      controller?.jumpToPage(index);
+      controller?.jumpToPage(indexPage);
     }
   }
 
   Widget buildCategoryAppBar(context) => AppBar(
-        title: Text(widget.healthCategory.categoryName),
+        title: Text(widget.loveCategory.categoryName),
         actions: const [
           Icon(Icons.filter_alt_outlined),
           SizedBox(
@@ -91,14 +90,14 @@ class _HealthCategoryPageState extends State<HealthCategoryPage> {
           child: Container(
             padding: const EdgeInsets.symmetric(vertical: 16),
             child: QuestionNumberWidget(
-              questions: widget.healthCategory.questions,
+              questions: widget.loveCategory.questions,
               question: question!,
               onQuestionNumberChangedCallback: (index) {
-                nextQuestion(index: index, jump: true);
+                nextQuestion(index: index);
               },
               // onClickedNumber: (index) {
-              //   return nextQuestion(index: index);
-              // }
+              //return nextQuestion(index: index);
+              //}
             ),
           ),
         ),

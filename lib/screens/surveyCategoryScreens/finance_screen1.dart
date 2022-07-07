@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:my_survey/models/category.dart';
-import '../Widgets/questionWidgets.dart';
-import '../Widgets/question_number_widget.dart';
-import '../models/my_questions.dart';
-import '../models/options.dart';
+import '../../Widgets/questionWidgets.dart';
+import '../../Widgets/question_number_widget.dart';
+import '../../models/my_questions.dart';
+import '../../models/options.dart';
 
-class LoveCategoryPage extends StatefulWidget {
-  final SurveyCategoryModel loveCategory;
-  const LoveCategoryPage({Key? key, required this.loveCategory})
+class FinancecategoryPage extends StatefulWidget {
+  final SurveyCategoryModel FinanceCategory;
+  const FinancecategoryPage({Key? key, required this.FinanceCategory})
       : super(key: key);
 
   @override
-  State<LoveCategoryPage> createState() => _LoveCategoryPageState();
+  State<FinancecategoryPage> createState() => _FinancecategoryPageState();
 }
 
-class _LoveCategoryPageState extends State<LoveCategoryPage> {
+class _FinancecategoryPageState extends State<FinancecategoryPage> {
   PageController? controller;
   Question? question;
 
@@ -23,7 +23,7 @@ class _LoveCategoryPageState extends State<LoveCategoryPage> {
     super.initState();
 
     controller = PageController();
-    question = widget.loveCategory.questions.first;
+    question = widget.FinanceCategory.questions.first;
   }
 
   void selectOption(Option option) {
@@ -40,7 +40,7 @@ class _LoveCategoryPageState extends State<LoveCategoryPage> {
           preferredSize: const Size.fromHeight(100),
           child: buildCategoryAppBar(context)),
       body: QuestionWidget(
-        category: widget.loveCategory,
+        category: widget.FinanceCategory,
         onChangedPage: (index) {
           return nextQuestion(index: index, jump: true);
         },
@@ -61,7 +61,7 @@ class _LoveCategoryPageState extends State<LoveCategoryPage> {
       indexPage = nextPage.toInt();
     }
     setState(() {
-      question = widget.loveCategory.questions[indexPage];
+      question = widget.FinanceCategory.questions[indexPage];
     });
     if (jump) {
       controller?.jumpToPage(indexPage);
@@ -69,7 +69,7 @@ class _LoveCategoryPageState extends State<LoveCategoryPage> {
   }
 
   Widget buildCategoryAppBar(context) => AppBar(
-        title: Text(widget.loveCategory.categoryName),
+        title: Text(widget.FinanceCategory.categoryName),
         actions: const [
           Icon(Icons.filter_alt_outlined),
           SizedBox(
@@ -90,15 +90,15 @@ class _LoveCategoryPageState extends State<LoveCategoryPage> {
           child: Container(
             padding: const EdgeInsets.symmetric(vertical: 16),
             child: QuestionNumberWidget(
-              questions: widget.loveCategory.questions,
-              question: question!,
-              onQuestionNumberChangedCallback: (index) {
-                nextQuestion(index: index);
-              },
-              // onClickedNumber: (index) {
-              //return nextQuestion(index: index);
-              //}
-            ),
+                questions: widget.FinanceCategory.questions,
+                question: question!,
+                onQuestionNumberChangedCallback: (index) {
+                  nextQuestion(index: index);
+                }
+                // onClickedNumber: (index) {
+                //return nextQuestion(index: index);
+                //}
+                ),
           ),
         ),
       );

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import '../models/category.dart';
-import '../screens/finance_screen1.dart';
-import '../screens/health_screen.dart';
-import '../screens/love_screen.dart';
-import '../screens/personality_screen.dart';
+import '../screens/surveyCategoryScreens/finance_screen1.dart';
+import '../screens/surveyCategoryScreens/health_screen.dart';
+import '../screens/surveyCategoryScreens/love_screen.dart';
+import '../screens/surveyCategoryScreens/personality_screen.dart';
 
 class SurveyCategoriesWidget extends StatelessWidget {
   final SurveyCategoryModel category;
