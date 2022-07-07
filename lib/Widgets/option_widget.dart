@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:my_survey/models/finance_questions.dart';
 import 'package:my_survey/models/my_questions.dart';
 import 'package:my_survey/models/options.dart';
 import 'package:my_survey/utils.dart';

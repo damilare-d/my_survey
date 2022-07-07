@@ -124,6 +124,9 @@ class FinalResultPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text('Result'),
+      ),
       body: Container(
         height: MediaQuery.of(context).size.height * 0.8,
         width: MediaQuery.of(context).size.width * 0.8,
@@ -136,27 +139,35 @@ class FinalResultPage extends StatelessWidget {
           },
           itemBuilder: ((context, index) {
             final question = category.questions[index];
-            return buildAnswer(question, index);
+            return buildAnswer(
+              context,
+              question,
+              index,
+            );
           }),
         ),
       ),
     );
   }
 
-  Widget buildAnswer(Question question, int index) {
-    return Scaffold(
-      body: Column(
+  Widget buildAnswer(BuildContext context, Question question, int index) {
+    return Center(
+      child: Column(
         children: [
-          Text(category.questions[index].questionText),
+          Text(
+            category.questions[index].questionText,
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
           SizedBox(height: 10),
           Text(category.questions[index].selectedOption.toString()),
           SizedBox(
             height: 20,
           ),
           MaterialButton(
+            child: Text('EXIT'),
             onPressed: () {
-              // Navigator.of()
-              //     .push(MaterialPageRoute(builder: (context) => LogInScreen()));
+              Navigator.of(context)
+                  .push(MaterialPageRoute(builder: (context) => LogInScreen()));
             },
           )
         ],
