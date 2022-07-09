@@ -61,42 +61,46 @@ class _ResultScreenState extends State<ResultScreen> {
     return Stack(
       children: [
         Scaffold(
-          backgroundColor: Colors.grey,
+          backgroundColor: Colors.white,
           body: SafeArea(
-              child: Center(
-                  child: Column(
-            children: [
-              const Text(
-                'Thanks for making mySurvey\n be a part of your conscious growth process',
-                style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-              ),
-              SizedBox(height: 5),
-              const Text(
-                'do click on the submit button if you are done with the survey',
-                style: TextStyle(fontSize: 10, fontStyle: FontStyle.italic),
-              ),
-              SizedBox(height: 25),
-              TextButton(
-                onPressed: () {
-                  if (isPlaying) {
-                    controller.stop();
-                  } else {
-                    controller.play();
-                  }
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => FinalResultPage(
-                            category: SurveyCategoryModel(
-                                icon: Icons.favorite,
-                                questions: questions,
-                                categoryName: 'Love'),
-                          )));
-                },
-                child: Text(isPlaying ? 'submit' : 'submit',
-                    style: const TextStyle(
-                        fontSize: 20, fontWeight: FontWeight.bold)),
-              ),
-            ],
-          ))),
+              child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Center(
+                child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text(
+                  'Thanks for making mySurvey\nbe a part of your conscious growth process',
+                  style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                ),
+                SizedBox(height: 5),
+                const Text(
+                  'do click on the submit button if you are done with the survey',
+                  style: TextStyle(fontSize: 15, fontStyle: FontStyle.italic),
+                ),
+                SizedBox(height: 25),
+                TextButton(
+                  onPressed: () {
+                    if (isPlaying) {
+                      controller.stop();
+                    } else {
+                      controller.play();
+                    }
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => FinalResultPage(
+                              category: SurveyCategoryModel(
+                                  icon: Icons.favorite,
+                                  questions: questions,
+                                  categoryName: 'Love'),
+                            )));
+                  },
+                  child: Text(isPlaying ? 'SUBMIT' : 'SUBMIT',
+                      style: const TextStyle(
+                          fontSize: 20, fontWeight: FontWeight.bold)),
+                ),
+              ],
+            )),
+          )),
         ),
         ConfettiWidget(
           confettiController: controller,
@@ -127,24 +131,60 @@ class FinalResultPage extends StatelessWidget {
       appBar: AppBar(
         title: Text('Result'),
       ),
-      body: Container(
-        height: MediaQuery.of(context).size.height * 0.8,
-        width: MediaQuery.of(context).size.width * 0.8,
-        child: ListView.separated(
-          itemCount: category.questions.length,
-          separatorBuilder: (BuildContext context, int index) {
-            return SizedBox(
-              height: 10,
-            );
-          },
-          itemBuilder: ((context, index) {
-            final question = category.questions[index];
-            return buildAnswer(
-              context,
-              question,
-              index,
-            );
-          }),
+      body: Center(
+        child: Column(
+          children: [
+            Container(
+              height: MediaQuery.of(context).size.height * 0.8,
+              width: MediaQuery.of(context).size.width * 0.8,
+              child: ListView.separated(
+                itemCount: category.questions.length,
+                separatorBuilder: (BuildContext context, int index) {
+                  return SizedBox(
+                    height: 10,
+                  );
+                },
+                itemBuilder: ((context, index) {
+                  final question = category.questions[index];
+                  return buildAnswer(
+                    context,
+                    question,
+                    index,
+                  );
+                }),
+              ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                MaterialButton(
+                  color: Colors.blue,
+                  child: Text(
+                    'EXIT',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  onPressed: () {
+                    Navigator.of(context).push(
+                        MaterialPageRoute(builder: (context) => LogInScreen()));
+                  },
+                ),
+                SizedBox(
+                  width: 10,
+                ),
+                MaterialButton(
+                  color: Colors.blue,
+                  child: Text(
+                    'ANALYSE',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  onPressed: () {
+                    // Navigator.of(context).push(
+                    //     MaterialPageRoute(builder: (context) => LogInScreen()));
+                  },
+                )
+              ],
+            )
+          ],
         ),
       ),
     );
@@ -156,20 +196,17 @@ class FinalResultPage extends StatelessWidget {
         children: [
           Text(
             category.questions[index].questionText,
-            style: TextStyle(fontWeight: FontWeight.bold),
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
           ),
           SizedBox(height: 10),
-          Text(category.questions[index].selectedOption.toString()),
+          Text(category.questions[index].selectedOption?.optionText ??
+              'Not Answered'),
           SizedBox(
             height: 20,
           ),
-          MaterialButton(
-            child: Text('EXIT'),
-            onPressed: () {
-              Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (context) => LogInScreen()));
-            },
-          )
+          Divider(
+            thickness: 1.5,
+          ),
         ],
       ),
     );

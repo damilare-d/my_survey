@@ -28,7 +28,6 @@ class _LoveCategoryPageState extends State<LoveCategoryPage> {
 
   void selectOption(Option option) {
     setState(() {
-      //question!.isLocked = true;
       question!.selectedOption = option;
     });
   }
